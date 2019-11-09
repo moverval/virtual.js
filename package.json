@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "echo \"Please choose a test option\" && exit 1",
+    "test:coveralls": "jest --coverage --coverageReporters=text-lcov | coveralls",
     "lint": "tslint -c tslint.json \"src/**/*.ts\"",
     "lint:fix": "tslint --fix -c tslint.json \"src/**/*.ts\"",
     "build": "npm run lint && rollup --config"
@@ -65,5 +66,8 @@
       "\\.(ts)$": "<rootDir>/node_modules/ts-jest/preprocessor.js",
       "^.+\\.js$": "babel-jest"
     }
+  },
+  "devDependencies": {
+    "coveralls": "^3.0.7"
   }
 }
