@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Please choose a test option\" && exit 1",
+    "test": "npm run build",
     "test:coveralls": "jest --coverage --coverageReporters=text-lcov | coveralls",
     "lint": "tslint -c tslint.json \"src/**/*.ts\"",
     "lint:fix": "tslint --fix -c tslint.json \"src/**/*.ts\"",
