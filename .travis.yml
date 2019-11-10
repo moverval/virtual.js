@@ -5,12 +5,21 @@ language: node_js
 node_js:
   - node
 
+cache: npm
+
 install:
   - npm ci
 
 script:
   - npm run lint
   - npm run test
+
+deploy:
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  local_dir: dist
+  on:
+    branch: build
 
 notifications:
   email: false
