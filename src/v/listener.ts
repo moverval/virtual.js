@@ -24,6 +24,7 @@ export default class Listener implements Destructable {
         if(!this.eventList[evtName]) {
             this.eventList[evtName] = [];
         }
+        this.eventList[evtName].push(listener);
         if(this.regi) {
             return this.regi(evtName, listener);
         } else {

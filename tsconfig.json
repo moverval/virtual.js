@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
-    "declaration": false,
+    "declaration": true,
     "diagnostics": true,
     "target": "ES5",
     "downlevelIteration": true,
@@ -17,7 +17,9 @@
     "typeRoots": [
       "./node_modules/@types"
     ],
-    "types": ["jest"]
+    "types": ["jest"],
+    "outDir": "./dist",
+    "lib": ["dom", "es2015"]
   },
   "include": [
     "src/**/*"

@@ -1,12 +1,12 @@
-import ElementListener from './v/elementListener';
+import ListenerLauncher, { ElementListenerCreation } from './v/ListenerLauncher';
 
 export default class Tool implements Destructable {
-    li: ElementListener;
-    private mainElement: HTMLDivElement;
+    li: ListenerLauncher;
+    element: HTMLDivElement;
 
     constructor(element: HTMLDivElement) {
-        this.mainElement = element;
-        this.li = new ElementListener(element);
+        this.element = element;
+        this.li = new ListenerLauncher(ElementListenerCreation);
     }
 
     unload() {
@@ -16,4 +16,8 @@ export default class Tool implements Destructable {
 
 export interface Destructable {
     unload: () => any;
+}
+
+export interface TypeDetectable {
+    type: string;
 }

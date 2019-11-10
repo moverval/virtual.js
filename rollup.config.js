@@ -27,7 +27,6 @@ export default [
             terser({
                 output: {
                     comments: false,
-                    beautify: false,
                     semicolons: false
                 }
             })
