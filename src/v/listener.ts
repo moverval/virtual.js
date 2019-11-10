@@ -41,13 +41,17 @@ export default class Listener implements Destructable {
     }
 
     unload() {
+        let success = true;
         for(const evtName in this.eventList) {
             if(this.eventList[evtName]) {
                 const pointer = this;
                 this.eventList[evtName].forEach((listener) => {
-                    pointer.uregi(evtName, listener);
+                    if(!pointer.uregi(evtName, listener)) {
+                        success = false;
+                    }
                 });
             }
         }
+        return success;
     }
 }

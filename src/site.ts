@@ -26,8 +26,10 @@ export default class Site implements Destructable {
     setEnvironment(environmentFunction: EnvironmentFunction) {
         if(typeof environmentFunction === 'function' && !this.isRunning) {
             this.envFunction = environmentFunction;
+            return true;
         } else {
             throw new Error('createEnvironment only accepts functions');
+            return false;
         }
     }
 
@@ -35,6 +37,9 @@ export default class Site implements Destructable {
         if(typeof environmentFunction === 'function' && !this.isRunning) {
             this.envFunction(this.$);
             this.isRunning = true;
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -43,19 +48,21 @@ export default class Site implements Destructable {
             this.envFunction = environmentFunction;
             this.envFunction(this.$);
             this.isRunning = true;
+            return true;
         } else {
             throw new Error('createEnvironment only accepts functions');
+            return false;
         }
     }
 
     destroy() {
-        this.unload();
+        return this.unload();
     }
 
     unload() {
         this.envFunction = undefined;
         this.isRunning = false;
-        this.$.unload();
+        return this.$.unload();
     }
 
     private constructElement(predefinedClasses: boolean) {

@@ -22,6 +22,6 @@ export default class ElementListener extends Listener implements Destructable {
     }
 
     unload() {
-        super.unload();
+        return super.unload();
     }
 }

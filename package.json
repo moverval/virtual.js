@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npm run build",
-    "test:coveralls": "jest --coverage --coverageReporters=text-lcov | coveralls",
+    "test": "jest",
     "lint": "tslint -c tslint.json \"src/**/*.ts\"",
     "lint:fix": "tslint --fix -c tslint.json \"src/**/*.ts\"",
     "build": "npm run lint && rollup --config"
@@ -30,42 +29,6 @@
     "tslint": "^5.20.1",
     "tslint-eslint-rules": "^5.4.0",
     "typescript": "^3.7.2"
-  },
-  "jest": {
-    "transformIgnorePatterns": [
-      "node_modules/(?!shiva/)"
-    ],
-    "globals": {
-      "ts-jest": {
-        "tsConfigFile": "tsconfig.test.json"
-      },
-      "google": {}
-    },
-    "collectCoverageFrom": [
-      "src/**/*.ts",
-      "!src/**/*.schema.ts",
-      "!src/schema/*.ts"
-    ],
-    "testMatch": [
-      "<rootDir>/src/**/?(*.)test.ts",
-      "<rootDir>/tests/**/?(*.)test.ts"
-    ],
-    "coverageThreshold": {
-      "global": {
-        "branches": 0,
-        "functions": 0,
-        "lines": 0,
-        "statements": 0
-      }
-    },
-    "moduleFileExtensions": [
-      "ts",
-      "js"
-    ],
-    "transform": {
-      "\\.(ts)$": "<rootDir>/node_modules/ts-jest/preprocessor.js",
-      "^.+\\.js$": "babel-jest"
-    }
   },
   "devDependencies": {
     "coveralls": "^3.0.7"

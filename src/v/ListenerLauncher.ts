@@ -41,8 +41,12 @@ export default class ListenerLauncher implements Destructable, TypeDetectable {
     }
 
     unload() {
+        let success = true;
         this.listenerList.forEach((listener) => {
-            listener.unload();
+            if(!listener.unload()) {
+                success = false;
+            }
         });
+        return success;
     }
 }
