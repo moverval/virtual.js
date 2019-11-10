@@ -19,8 +19,9 @@ deploy:
   skip-cleanup: true
   github-token: $GITHUB_TOKEN
   local_dir: dist
+  target_branch: build
   on:
-    branch: build
+    branch: master
 
 notifications:
   email: false
