@@ -1,4 +1,4 @@
-import ListenerLauncher, { ElementListenerCreation } from './v/listenerLauncher';
+import ListenerLauncher, { ElementListenerCreation } from "./v/listenerLauncher";
 
 export default class Tool implements Destructable {
     li: ListenerLauncher;

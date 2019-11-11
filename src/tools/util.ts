@@ -4,10 +4,12 @@ export interface PotentialDOMElement {
 }
 
 export function isDomElement(object: PotentialDOMElement) {
-    return  (typeof HTMLElement === 'object' ?
-            object instanceof HTMLElement :
-            object && typeof object === 'object'
+    return  (typeof object === "object"
             && object !== null
             && object.nodeType === 1
-            && typeof object.nodeName === 'string');
+            && typeof object.nodeName === "string");
+}
+
+export interface Mapable<T> {
+    [name: string]: T;
 }

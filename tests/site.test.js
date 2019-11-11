@@ -1,16 +1,16 @@
-const Virtual = require('../dist/virtual');
+const Virtual = require("../dist/virtual");
 
-test('Site is defined', () => {
+test("Site is defined", () => {
     expect(Virtual.Site).toBeTruthy();
 });
 
 const site = new Virtual.Site();
-test('Environment creation', () => {
+test("Environment creation", () => {
     expect(
         site.createEnvironment(($) => {})
     ).toBeTruthy();
 });
 
-test('Environment destruction', () => {
+test("Environment destruction", () => {
     expect(site.destroy()).toBeTruthy();
 });

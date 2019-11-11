@@ -1,14 +1,11 @@
-import { Destructable } from '../tool';
-
-export interface EventMap {
-    [evtName: string]: BasicListener[];
-}
+import { Destructable } from "../tool";
+import { Mapable } from "../tools/util";
 
 export type BasicListener = (...event: object[]) => any;
 export type ListenerInterpreter = (evtName: string, listener: BasicListener) => boolean;
 
 export default class Listener implements Destructable {
-    eventList: EventMap = {};
+    eventList: Mapable<BasicListener[]> = {};
     private regi: ListenerInterpreter; // Listener Interpreter for registering
     private uregi: ListenerInterpreter; // Listener Interpreter for unregistering
 
@@ -52,6 +49,7 @@ export default class Listener implements Destructable {
                 });
             }
         }
+        this.eventList = {};
         return success;
     }
 }

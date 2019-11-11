@@ -1,5 +1,5 @@
-import Listener, { BasicListener } from './listener';
-import { Destructable } from '../tool';
+import Listener, { BasicListener } from "./listener";
+import { Destructable } from "../tool";
 
 export default class ElementListener extends Listener implements Destructable {
     element: HTMLElement;
