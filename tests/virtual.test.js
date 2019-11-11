@@ -1,6 +1,12 @@
 
 const Virtual = require("../dist/virtual");
 
-test("Virtual is defined", () => {
-    expect(Virtual).toBeTruthy();
-});
+const VIRTUAL_TEXT = "Virtual is defined";
+
+function start() {
+    test(VIRTUAL_TEXT, () => {
+        expect(Virtual).toBeTruthy();
+    });
+}
+
+start();
