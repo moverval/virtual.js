@@ -8,6 +8,7 @@ export interface SiteConstructOptions {
 export type EnvironmentFunction = ($: Tool) => any | boolean;
 
 export default class Site implements Destructable {
+    containerElement: HTMLDivElement;
     htmlElement: HTMLDivElement;
     backup: ElementBackup;
     $: Tool;
@@ -30,8 +31,12 @@ export default class Site implements Destructable {
     }
 
     restoreEnvironment() {
-        this.backup.restore(this.htmlElement);
+        const node = this.backup.restore();
+        this.containerElement.innerHTML = "";
+        this.containerElement.appendChild(node);
+        this.htmlElement = this.containerElement.getElementsByTagName("div")[0];
         this.backup = undefined;
+        this.$.element = this.htmlElement;
     }
 
     setEnvironment(environmentFunction: EnvironmentFunction) {
@@ -80,9 +85,12 @@ export default class Site implements Destructable {
     }
 
     private constructElement(predefinedClasses: boolean) {
+        this.containerElement = document.createElement("div");
         this.htmlElement = document.createElement("div");
         if(predefinedClasses) {
-            this.htmlElement.classList.add("virtualContainer");
+            this.containerElement.classList.add("virtualContainer");
+            this.htmlElement.classList.add("virtualElement");
         }
+        this.containerElement.appendChild(this.htmlElement);
     }
 }

@@ -1,21 +1,13 @@
 import { Mapable } from "../tools/util";
 
 export default class ElementBackup {
-    style: Mapable<string> = {};
+    node: Node;
 
     constructor(element: HTMLElement) {
-        for(const styleType in element.style) {
-            if(typeof styleType === "string") {
-                this.style[styleType] = element.style[styleType];
-            }
-        }
+        this.node = element.cloneNode(true);
     }
 
-    restore(element: HTMLElement) {
-        for(const styleType in this.style) {
-            if(typeof styleType === "string") {
-                element.style[styleType] = this.style[styleType];
-            }
-        }
+    restore() {
+        return this.node;
     }
 }
