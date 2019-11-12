@@ -47,16 +47,6 @@ export const Style: LoadElement<HTMLLinkElement> = {
     }
 };
 
-export function ScriptLoad(path: string, callback: LoadCallback<HTMLScriptElement>) {
-    const script = document.createElement("script");
-    const head = document.getElementsByTagName("head")[0];
-    script.onload = () => {
-        callback(script);
-    };
-    script.src = path;
-    head.appendChild(script);
-}
-
 export default class Loader<R> implements Destructable {
     loadFunction: LoadFunction<R>;
     unloadFunction: UnloadFunction<R>;
