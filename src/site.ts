@@ -13,6 +13,7 @@ export default class Site implements Destructable {
     backup: ElementBackup;
     $: Tool;
     isRunning: boolean = false;
+    private extraFunctions: EnvironmentFunction[] = [];
     private envFunction: EnvironmentFunction;
 
     constructor(options?: SiteConstructOptions) {
@@ -31,12 +32,16 @@ export default class Site implements Destructable {
     }
 
     restoreEnvironment() {
-        const node = this.backup.restore();
-        this.containerElement.innerHTML = "";
-        this.containerElement.appendChild(node);
-        this.htmlElement = this.containerElement.getElementsByTagName("div")[0];
-        this.backup = undefined;
-        this.$.element = this.htmlElement;
+        if(this.backup) {
+            const node = this.backup.restore();
+            this.containerElement.innerHTML = "";
+            this.containerElement.appendChild(node);
+            this.htmlElement = this.containerElement.getElementsByTagName("div")[0];
+            this.deleteBackup();
+            this.$.element = this.htmlElement;
+        } else {
+            throw new Error("No Environment was created.");
+        }
     }
 
     setEnvironment(environmentFunction: EnvironmentFunction) {
@@ -49,8 +54,8 @@ export default class Site implements Destructable {
         }
     }
 
-    runEnvironment(environmentFunction: EnvironmentFunction) {
-        if(typeof environmentFunction === "function" && !this.isRunning) {
+    runEnvironment() {
+        if(typeof this.envFunction === "function" && !this.isRunning) {
             this.enableEnvironment();
             this.envFunction(this.$);
             this.isRunning = true;
@@ -73,12 +78,31 @@ export default class Site implements Destructable {
         }
     }
 
-    destroy() {
+    addEnvironment(environmentFunction: EnvironmentFunction) {
+        if(typeof environmentFunction === "function" && this.isRunning) {
+            const count = this.extraFunctions.push(environmentFunction);
+            this.extraFunctions[count - 1](this.$);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    deleteBackup() {
+        this.backup = undefined;
+    }
+
+    removeEnvFunc() {
+        this.extraFunctions = [];
+        this.envFunction = null;
+    }
+
+    reset() {
         return this.unload();
     }
 
     unload() {
-        this.envFunction = undefined;
+        this.removeEnvFunc();
         this.isRunning = false;
         this.restoreEnvironment();
         return this.$.unload();
