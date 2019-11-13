@@ -28,7 +28,11 @@ export default class Site implements Destructable {
     }
 
     enableEnvironment() {
-        this.backup = new ElementBackup(this.htmlElement);
+        if(this.backup) {
+            this.backup = new ElementBackup(this.htmlElement);
+        } else {
+            throw new Error("Environment already enabled");
+        }
     }
 
     restoreEnvironment() {
