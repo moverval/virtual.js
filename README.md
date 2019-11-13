@@ -1,7 +1,7 @@
 # VirtualJS
 [![Build Status](https://travis-ci.org/MMNN321/virtual-js.svg?branch=master)](https://travis-ci.org/MMNN321/virtual-js) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/a7f8133f8c7a4f59aa829c7b75a21233)](https://www.codacy.com/manual/MMNN321/virtual-js?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=MMNN321/virtual-js&amp;utm_campaign=Badge_Grade) [![CodeFactor](https://www.codefactor.io/repository/github/mmnn321/virtual-js/badge)](https://www.codefactor.io/repository/github/mmnn321/virtual-js)
 
-## (For) what is VirtualJS?
+## (For) what is VirtualJS
 
 ``VirtualJS`` is a library for web-development. It was created to seperate different javascript tasks and html elements. This is useful because on every interactive website, content needs to respond to the user. Because of the different actions that are needed to display content correctly it quickly becomes complex and the different javscript tasks overlap. New Things have to be added (scripts, styles, elements or listeners) and the script goes slower after time because no longer relevant listeners, scripts and styles are not getting removed. ``VirtualJS`` is tracking this imports and they can be removed with one function. ``VirtualJS`` also provides an environment where all variables are getting deleted on cleanup (this prevents errors e.g. when a script file is included twice). This splitting is very powerful and can be configured with different components. It works in every popular browser (also IE) and can be integrated quickly. It is also important to know that ``VirtualJS`` can be used in different ways because of the non dependent objects. It can also extend with plugins created by users.
 
@@ -12,20 +12,19 @@ VirtualJS comes with a [prebuilt package](https://github.com/MMNN321/virtual-js/
 Here is the detailed way:
 
 Use git to clone the repository:
-```
+```shell
 git clone https://github.com/MMNN321/virtual-js.git
 ```
 
 After the project is downloaded, the packages can be installed that are required to run the project:
-```
+```shell
 npm ci
 ```
 
 ``npm ci`` is the standard command that is used for it. If problems occur, ``npm i`` or ``npm install`` can also be used to install the packages.
 
-
 The last step is to build the project. The project builds with ``rollup`` and it can easily be called by typing:
-```
+```shell
 npm run build
 ```
 
@@ -255,7 +254,7 @@ const succces = loader.unload();
 
 ## Types
 
-### Site
+### Site Object
 
 ```ts
 class Virtual {
@@ -277,7 +276,7 @@ export interface SiteConstructOptions {
 }
 ```
 
-### Loader
+### Loader Object
 
 #### LoadElement
 
