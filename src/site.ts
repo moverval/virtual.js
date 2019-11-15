@@ -6,6 +6,7 @@ export interface SiteConstructOptions {
 }
 
 export type EnvironmentFunction = ($: Tool) => any | boolean;
+export type HTMLResponseCallback = (request: XMLHttpRequest) => any;
 
 export default class Site implements Destructable {
     containerElement: HTMLDivElement;
@@ -27,8 +28,23 @@ export default class Site implements Destructable {
         this.$ = new Tool(this.htmlElement);
     }
 
+    loadHTML(uri: string, cb: HTMLResponseCallback) {
+        const xhr = new XMLHttpRequest();
+        xhr.onload = (evt) => {
+            this.htmlElement.innerHTML = xhr.responseText;
+            if(cb) {
+                return cb(xhr);
+            } else {
+                return true;
+            }
+        };
+
+        xhr.open("GET", uri);
+        xhr.send();
+    }
+
     enableEnvironment() {
-        if(this.backup) {
+        if(!this.backup) {
             this.backup = new ElementBackup(this.htmlElement);
         } else {
             throw new Error("Environment already enabled");

@@ -90,6 +90,16 @@ It executes the [environment function](#environmentfunction). If no environment 
 
 Enables the environment. This function is automatically getting called by [createEnvironment](#sitecreateenvironment) and [runEnvironment](#siterunenvironment). When enabled, it can not be activated again before [restoreEnvironment](#siterestoreenvironment) or [deleteBackup](#sitedeletebackup) has been called. If this function gets called when the environment is active, this function will throw an error.
 
+#### Site.loadHTML
+
+Loads ``html`` into the virtual element. This is only recommended when the virtual environment is on. The first parameter is for setting the ``URI`` to the document and the second is optional. It is for getting a [callback](#loadhtml-callback) when the document is loaded.
+
+```js
+site.loadHTML("example.html", function(request) {
+    // Code executes when example.html has loaded into virtual element
+});
+```
+
 #### Site.restoreEnvironment
 
 When called, this function will restore the element. Listeners that were constructed with [Tool](#tool) will not be removed when they were not bound to a virtual element (an element that was constructed by VirtualJS).
@@ -262,6 +272,12 @@ const succces = loader.unload();
 class Virtual {
     static Site = Site;
 }
+```
+
+#### loadHTML Callback
+
+```ts
+export type HTMLResponseCallback = (request: XMLHttpRequest) => any;
 ```
 
 #### EnvironmentFunction
